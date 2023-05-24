@@ -3,7 +3,7 @@
 # Version modifiee de la librairie https://github.com/mxgxw/MFRC522-python
 
 import RPi.GPIO as GPIO
-import MFRC522
+import hardware.rfid.MFRC522 as MFRC522
 import signal
 import time
 
