@@ -42,7 +42,7 @@ class APIServer:
         self.run_server()
 
     # Point d'entrée principal
-    def run_server():
+    def run_server(self):
         host = 'localhost'
         port = 8000
 
