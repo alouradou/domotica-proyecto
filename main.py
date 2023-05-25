@@ -1,7 +1,8 @@
 # from hardware.rfid.rfid_reader import RFIDReader
 import threading
 import time
-import paho.mqtt.client as mqtt
+import mqtt.sub as mqtt_sub
+
 
 def rfid_loop():
     while True:
@@ -9,7 +10,7 @@ def rfid_loop():
         time.sleep(5)
 
 def mqtt_listen():
-    print("MQTT listen")
+    mqtt_sub.MQTTClient()
 
 
 def main():
