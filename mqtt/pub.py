@@ -10,15 +10,15 @@ broker_address="127.0.0.1" # Use the Raspberry Pi IP address
 #broker_address="broker.hivemq.com"
 #broker_address="test.mosquitto.org"
 
-client = mqtt.Client()
+class MQTTPublish:
+    def __init__(self, broker_address=broker_address):
+        self.broker_address = broker_address
+        self.client = mqtt.Client()
 
-client.connect(broker_address, 1883, 60)
-
-client.loop_start()    #start the loop
-
-for n in range(1,5):
-	client.publish("upm/mqtt",n) # Publicamos
-
-client.disconnect()
-client.loop_stop()
+    def publish(self, topic, message):
+        self.client.connect(self.broker_address, 1883, 60)
+        self.client.loop_start()
+        self.client.publish(topic, message)
+        self.client.disconnect()
+        self.client.loop_stop()
 

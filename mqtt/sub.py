@@ -1,7 +1,11 @@
 import paho.mqtt.client as mqtt
+import hardware.lcd.lcd_parking as lcdparking
+from main import GLOBALS
 
 broker_address = "127.0.0.1"  # Use the Raspberry Pi IP address
 # broker_address = "test.mosquitto.org"
+
+global SPOTS
 
 class MQTTClient:
     def __init__(self, broker_address=broker_address, port=1883):
@@ -30,8 +34,22 @@ class MQTTClient:
             print("Changing out message to " + str(msg.payload.decode("utf-8")))
         elif msg.topic == "upm/mqtt/presence":
             print("Presence state changed to " + str(msg.payload.decode("utf-8")))
-        elif msg.topic == "upm/mqtt/rfid":
+        elif msg.topic == "upm/mqtt/spots":
+            GLOBALS.spots = int(msg.payload.decode("utf-8"))
+        elif msg.topic == "upm/mqtt/rfid/uid":
             print("RFID tag read: " + str(msg.payload.decode("utf-8")))
+        elif msg.topic == "upm/mqtt/rfid/open":
+            print("RFID ok: " + str(msg.payload.decode("utf-8")))
+            if str(msg.payload.decode("utf-8")) == "True":
+                print("Opening door")
+
+
+
+
+
+
+
+
 
 
 
