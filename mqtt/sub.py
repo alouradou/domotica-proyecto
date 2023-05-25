@@ -37,6 +37,7 @@ class MQTTClient:
             print("Presence state changed to " + str(msg.payload.decode("utf-8")))
         elif msg.topic == "upm/mqtt/spots":
             self.GLOBALS['spots'] = int(msg.payload.decode("utf-8"))
+            lcdparking.LcdParking("Plazas: " + str(self.GLOBALS['spots']))
         elif msg.topic == "upm/mqtt/rfid/uid":
             print("RFID tag read: " + str(msg.payload.decode("utf-8")))
         elif msg.topic == "upm/mqtt/rfid/open":
@@ -44,13 +45,9 @@ class MQTTClient:
             if str(msg.payload.decode("utf-8")) == "True":
                 print("Opening door")
                 lcdparking.LcdParking(self.GLOBALS['welcomeMessage'])
-                time.sleep(3)
-                lcdparking.LcdParking("Plazas:" + str(self.GLOBALS['spots']))
             if str(msg.payload.decode("utf-8")) == "False":
                 print("Door staying closed")
                 lcdparking.LcdParking(self.GLOBALS['outMessage'])
-                time.sleep(3)
-                lcdparking.LcdParking("Plazas:" + str(self.GLOBALS['spots']))
 
 
 

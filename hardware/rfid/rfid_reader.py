@@ -88,14 +88,13 @@ class RFIDReader:
             dist = self.distance()
             print(dist)
         self.GLOBALS['spots'] = self.GLOBALS['spots'] + 1
-
-        MQTTPublish().publish("upm/mqtt/spots", self.GLOBALS['spots'])
         GPIO.output(11, GPIO.LOW)
         GPIO.output(13, GPIO.HIGH)
         time.sleep(0.4)
         # GPIO.output(self.Led_verte, GPIO.LOW)
         self.pwm.ChangeDutyCycle(self.angle_to_percent(0))
         print("LED off moteur 0")
+        MQTTPublish().publish("upm/mqtt/spots", self.GLOBALS['spots'])
 
 
     def read_rfid(self):
@@ -129,13 +128,13 @@ class RFIDReader:
                         dist = self.distance()
                         print(dist)
                     self.GLOBALS['spots'] = self.GLOBALS['spots'] - 1
-
-                    MQTTPublish().publish("upm/mqtt/spots", self.GLOBALS['spots'])
                     time.sleep(1)
                     GPIO.output(self.Led_verte, GPIO.LOW)
                     self.pwm.ChangeDutyCycle(self.angle_to_percent(0))
                     time.sleep(1)
                     print("LED off moteur 0")
+                    MQTTPublish().publish("upm/mqtt/spots", self.GLOBALS['spots'])
+
                 else:
                     MQTTPublish().publish("upm/mqtt/rfid/open", False)
                     GPIO.output(self.Led_rouge, GPIO.HIGH)
