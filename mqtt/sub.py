@@ -45,12 +45,12 @@ class MQTTClient:
                 print("Opening door")
                 lcdparking.LcdParking(self.GLOBALS['welcomeMessage'])
                 time.sleep(3)
-                lcdparking.LcdParking("Plazas:" + self.GLOBALS['spots'])
+                lcdparking.LcdParking("Plazas:" + str(self.GLOBALS['spots']))
             if str(msg.payload.decode("utf-8")) == "False":
                 print("Door staying closed")
                 lcdparking.LcdParking(self.GLOBALS['outMessage'])
                 time.sleep(3)
-                lcdparking.LcdParking("Plazas:" + self.GLOBALS['spots'])
+                lcdparking.LcdParking("Plazas:" + str(self.GLOBALS['spots']))
 
 
 
