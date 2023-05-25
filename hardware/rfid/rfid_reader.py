@@ -89,8 +89,8 @@ class RFIDReader:
                 uid = str(uid[0]) + "." + str(uid[1]) + "." + str(uid[2]) + "." + str(uid[3])
                 print("UID de la carte : " + uid)
                 MQTTPublish().publish("upm/mqtt/rfid/uid", uid)
-                print(self.GLOBALS.spots)
-                if ((uid[0] == 243) and (uid[1] == 5) and (uid[2] == 26) and (uid[3] == 154) and (self.GLOBALS.spots > 0)):
+                print(self.GLOBALS['spots'])
+                if ((uid[0] == 243) and (uid[1] == 5) and (uid[2] == 26) and (uid[3] == 154) and (self.GLOBALS['spots'] > 0)):
                     MQTTPublish().publish("upm/mqtt/rfid/open", True)
                     GPIO.output(self.Led_verte, GPIO.HIGH)
                     self.pwm.ChangeDutyCycle(self.angle_to_percent(90))
@@ -103,9 +103,9 @@ class RFIDReader:
                         time.sleep(0.5)
                         dist = self.distance()
                         print(dist)
-                    self.GLOBALS.spots = self.GLOBALS.spots - 1
+                    self.GLOBALS['spots'] = self.GLOBALS['spots'] - 1
 
-                    MQTTPublish().publish("upm/mqtt/spots", self.GLOBALS.spots)
+                    MQTTPublish().publish("upm/mqtt/spots", self.GLOBALS['spots'])
                     time.sleep(1)
                     MQTTPublish().publish("upm/mqtt/rfid/open", False)
                     GPIO.output(self.Led_verte, GPIO.LOW)
