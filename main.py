@@ -4,24 +4,24 @@ from hardware.rfid.rfid_reader import RFIDReader as RFIDReader
 import threading
 import time
 import mqtt.sub as mqtt_sub
-# import hardware.presence.ultrasound as us
 import hardware.servo.servo as servo
 
-
-# def rfid_loop():
-#     RFIDReader()
+global GLOBALS
 
 def mqtt_listen():
     mqtt_sub.MQTTClient()
 
-# def us_loop():
-#     us.Ultrasound()
 
 def servo_loop():
     servo.ServoControl() # not a loop
 
 
 def main():
+    GLOBALS = {
+        "spots": 10,
+        "welcomeMessage": "¡Bienvenido al parking!",
+        "outMessage": "¡Hasta luego!",
+    }
     rfid_reader = RFIDReader()
 
     mqtt_thread = threading.Thread(target=mqtt_listen)

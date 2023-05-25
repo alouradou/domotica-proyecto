@@ -7,7 +7,7 @@ import hardware.rfid.MFRC522 as MFRC522
 import signal
 import time
 
-from main import GLOBALS
+# from main import GLOBALS
 from mqtt.pub import MQTTPublish
 
 

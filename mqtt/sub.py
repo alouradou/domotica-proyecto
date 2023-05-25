@@ -1,6 +1,6 @@
 import paho.mqtt.client as mqtt
 import hardware.lcd.lcd_parking as lcdparking
-from main import GLOBALS
+# from main import GLOBALS
 
 broker_address = "127.0.0.1"  # Use the Raspberry Pi IP address
 # broker_address = "test.mosquitto.org"
