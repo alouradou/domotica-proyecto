@@ -8,7 +8,7 @@ GLOBALS = {'welcomeMessage': ''}
 # Classe de gestionnaire de requêtes
 class RequestHandler(BaseHTTPRequestHandler):
     def __init__(self, *args, **kwargs):
-        super().__init__(self, *args, **kwargs)
+        super().__init__(*args, **kwargs)
         self.rfid_reader = None
 
     def do_OPTIONS(self): # cors policy (important for api calls)
