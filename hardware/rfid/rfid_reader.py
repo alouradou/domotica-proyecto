@@ -141,6 +141,7 @@ class RFIDReader:
                     print("LED rouge allumee")
                     time.sleep(2)
                     GPIO.output(self.Led_rouge, GPIO.LOW)
+                    MQTTPublish().publish("upm/mqtt/spots", self.GLOBALS['spots'])
 
                 key = [0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF]
                 self.MIFAREReader.MFRC522_SelectTag(uid)
