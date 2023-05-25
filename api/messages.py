@@ -38,7 +38,6 @@ class RequestHandler(BaseHTTPRequestHandler):
         if message == "exit":
             GPIO.output(11, GPIO.HIGH)
             self.rfid_reader.force_open()
-            time.sleep(1)
             GPIO.output(11, GPIO.LOW)
             GPIO.output(13, GPIO.HIGH)
             time.sleep(2)
