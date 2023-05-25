@@ -2,6 +2,7 @@
 import threading
 import time
 import mqtt.sub as mqtt_sub
+import hardware.presence.ultrasound as us
 
 
 def rfid_loop():
@@ -11,6 +12,9 @@ def rfid_loop():
 
 def mqtt_listen():
     mqtt_sub.MQTTClient()
+
+def us_loop():
+    us.Ultrasound()
 
 
 def main():
