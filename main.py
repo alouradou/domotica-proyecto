@@ -3,6 +3,7 @@ import threading
 import time
 import mqtt.sub as mqtt_sub
 import hardware.presence.ultrasound as us
+import hardware.servo.servo as servo
 
 
 def rfid_loop():
@@ -17,9 +18,7 @@ def us_loop():
     us.Ultrasound()
 
 def servo_loop():
-    while True:
-        print("Servo loop: 0°")
-        time.sleep(5)
+    servo.ServoControl() # not a loop
 
 
 def main():

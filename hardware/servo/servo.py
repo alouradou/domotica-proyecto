@@ -3,7 +3,7 @@ import time
 
 global pwm_gpio, frequence, pwm
 
-class CervoControl:
+class ServoControl:
     def __init__(self):
         GPIO.setmode(GPIO.BOARD)
 
