@@ -10,8 +10,8 @@ global GLOBALS
 
 GLOBALS = {
     "spots": 10,
-    "welcomeMessage": "¡Bienvenido al parking!",
-    "outMessage": "¡Hasta luego!",
+    "welcomeMessage": "Bienvenido al\nparking",
+    "outMessage": "Hasta luego",
 }
 
 def mqtt_listen():
