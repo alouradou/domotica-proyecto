@@ -15,13 +15,25 @@ class MQTTClient:
     def on_connect(self, client, userdata, flags, rc):
         print("Connected with result code " + str(rc))
 
-        # Subscribing in on_connect() means that if we lose the connection and
-        # reconnect then subscriptions will be renewed.
-        # client.subscribe("$SYS/#")
-
         self.client.subscribe("upm/mqtt/#")
 
     # The callback for when a PUBLISH message is received from the server.
     def on_message(self, client, userdata, msg):
-        print(msg.topic + " " + str(msg.payload.decode("utf-8")))
+        # print in green
+        print("\033[92m" + msg.topic + " " + str(msg.payload.decode("utf-8")) + "\033[0m")
+
+        if msg.topic == "upm/mqtt/web":
+            print("Broker connected to web")
+        elif msg.topic == "upm/mqtt/name1":
+            print("Changing welcome message to " + str(msg.payload.decode("utf-8")))
+        elif msg.topic == "upm/mqtt/name2":
+            print("Changing out message to " + str(msg.payload.decode("utf-8")))
+        elif msg.topic == "upm/mqtt/presence":
+            print("Presence state changed to " + str(msg.payload.decode("utf-8")))
+        elif msg.topic == "upm/mqtt/rfid":
+            print("RFID tag read: " + str(msg.payload.decode("utf-8")))
+
+
+
+
 
