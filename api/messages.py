@@ -37,7 +37,7 @@ class RequestHandler(BaseHTTPRequestHandler):
         response_data = {'response': 'Hello, world!', 'input': message}
 
         if message == "exit":
-            GPIO.output(self.Led_verte, GPIO.HIGH)
+            GPIO.output(13, GPIO.HIGH)
             self.rfid_reader.force_open()
 
         self.wfile.write(json.dumps(response_data).encode())
@@ -72,7 +72,7 @@ class APIServer:
         server = HTTPServer((host, port), RequestHandler)
         server.rfid_reader = self.rfid_reader
         server.Led_verte = self.Led_verte
-        server.Le_rouge = self.Led_rouge
+        server.Led_rouge = self.Led_rouge
         print(f'Server running on {host}:{port}')
 
         try:
