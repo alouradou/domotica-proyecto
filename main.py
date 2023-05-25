@@ -10,7 +10,7 @@ import api.messages as api
 global GLOBALS
 
 GLOBALS = {
-    "spots": 10,
+    "spots": 6,
     "welcomeMessage": "Bienvenido al\nparking",
     "outMessage": "Hasta luego",
 }
