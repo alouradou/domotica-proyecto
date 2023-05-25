@@ -16,6 +16,11 @@ def mqtt_listen():
 def us_loop():
     us.Ultrasound()
 
+def servo_loop():
+    while True:
+        print("Servo loop: 0°")
+        time.sleep(5)
+
 
 def main():
 
