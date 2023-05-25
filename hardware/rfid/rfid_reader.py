@@ -86,9 +86,9 @@ class RFIDReader:
             (status, uid) = self.MIFAREReader.MFRC522_Anticoll()
 
             if status == self.MIFAREReader.MI_OK:
-                uid = str(uid[0]) + "." + str(uid[1]) + "." + str(uid[2]) + "." + str(uid[3])
-                print("UID de la carte : " + uid)
-                MQTTPublish().publish("upm/mqtt/rfid/uid", uid)
+                uid_str = str(uid[0]) + "." + str(uid[1]) + "." + str(uid[2]) + "." + str(uid[3])
+                print("UID de la carte : " + uid_str)
+                MQTTPublish().publish("upm/mqtt/rfid/uid", uid_str)
                 print(self.GLOBALS['spots'])
                 print(uid[0] == 243, uid[1] == 5, uid[2] == 26, uid[3] == 154, self.GLOBALS['spots'])
                 if ((uid[0] == 243) and (uid[1] == 5) and (uid[2] == 26) and (uid[3] == 154) and (self.GLOBALS['spots'] > 0)):
