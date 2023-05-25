@@ -42,6 +42,7 @@ class MQTTClient:
             print("RFID ok: " + str(msg.payload.decode("utf-8")))
             if str(msg.payload.decode("utf-8")) == "True":
                 print("Opening door")
+                lcdparking.LCDParking(GLOBALS.welcomeMessage)
 
 
 
