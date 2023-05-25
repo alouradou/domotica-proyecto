@@ -1,4 +1,5 @@
-import I2C_LCD_driver
+import domoticaproyecto.hardware.lcd.I2C_LCD_driver as I2C_LCD_driver
+
 from time import *
 
 

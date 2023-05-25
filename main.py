@@ -7,7 +7,7 @@ import hardware.servo.servo as servo
 
 
 def rfid_loop():
-    RFIDReader.RFIDReader()
+    RFIDReader()
 
 def mqtt_listen():
     mqtt_sub.MQTTClient()
@@ -23,11 +23,14 @@ def main():
 
     mqtt_thread = threading.Thread(target=mqtt_listen)
     rfid_thread = threading.Thread(target=rfid_loop)
-    us_thread = threading.Thread(target=us_loop)
+    #us_thread = threading.Thread(target=us_loop)
 
-    mqtt_thread.start()
+    mqtt_thread.daemon = True
+    rfid_thread.daemon = True
+
+    #mqtt_thread.start()
     rfid_thread.start()
-    us_thread.start()
+    #us_thread.start()
 
     # Attendre indéfiniment que les threads se terminent
     # (ne terminera jamais car ce sont des boucles infinies)
