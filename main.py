@@ -9,7 +9,7 @@ import hardware.servo.servo as servo
 global GLOBALS
 
 def mqtt_listen():
-    mqtt_sub.MQTTClient()
+    mqtt_sub.MQTTClient(GLOBALS)
 
 
 def servo_loop():
