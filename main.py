@@ -22,7 +22,7 @@ def main():
         "welcomeMessage": "¡Bienvenido al parking!",
         "outMessage": "¡Hasta luego!",
     }
-    rfid_reader = RFIDReader()
+    rfid_reader = RFIDReader(GLOBALS)
 
     mqtt_thread = threading.Thread(target=mqtt_listen)
     rfid_thread = threading.Thread(target=rfid_reader.read_rfid)
