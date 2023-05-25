@@ -28,7 +28,7 @@ class RFIDReader:
         GPIO.setup(self.GPIO_ECHO, GPIO.IN)
         self.pwm = GPIO.PWM(self.servo_gpio, self.frequence)
 
-        signal.signal(signal.SIGINT, self.end_read)
+        # signal.signal(signal.SIGINT, self.end_read)
         self.MIFAREReader = MFRC522.MFRC522()
 
         self.pwm.start(self.angle_to_percent(0))
