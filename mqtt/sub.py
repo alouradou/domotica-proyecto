@@ -34,7 +34,7 @@ class MQTTClient:
         elif msg.topic == "upm/mqtt/presence":
             print("Presence state changed to " + str(msg.payload.decode("utf-8")))
         elif msg.topic == "upm/mqtt/spots":
-            self.GLOBALS.spots = int(msg.payload.decode("utf-8"))
+            self.GLOBALS['spots'] = int(msg.payload.decode("utf-8"))
         elif msg.topic == "upm/mqtt/rfid/uid":
             print("RFID tag read: " + str(msg.payload.decode("utf-8")))
         elif msg.topic == "upm/mqtt/rfid/open":
