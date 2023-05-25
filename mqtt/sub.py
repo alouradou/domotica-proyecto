@@ -5,10 +5,9 @@ import hardware.lcd.lcd_parking as lcdparking
 broker_address = "127.0.0.1"  # Use the Raspberry Pi IP address
 # broker_address = "test.mosquitto.org"
 
-global SPOTS
-
 class MQTTClient:
-    def __init__(self, broker_address=broker_address, port=1883):
+    def __init__(self, GLOBALS, broker_address=broker_address, port=1883):
+        self.GLOBALS = GLOBALS
         self.client = mqtt.Client()
         self.client.on_connect = self.on_connect
         self.client.on_message = self.on_message
@@ -35,14 +34,17 @@ class MQTTClient:
         elif msg.topic == "upm/mqtt/presence":
             print("Presence state changed to " + str(msg.payload.decode("utf-8")))
         elif msg.topic == "upm/mqtt/spots":
-            GLOBALS.spots = int(msg.payload.decode("utf-8"))
+            self.GLOBALS.spots = int(msg.payload.decode("utf-8"))
         elif msg.topic == "upm/mqtt/rfid/uid":
             print("RFID tag read: " + str(msg.payload.decode("utf-8")))
         elif msg.topic == "upm/mqtt/rfid/open":
             print("RFID ok: " + str(msg.payload.decode("utf-8")))
             if str(msg.payload.decode("utf-8")) == "True":
                 print("Opening door")
-                lcdparking.LCDParking(GLOBALS.welcomeMessage)
+                lcdparking.LCDParking(self.GLOBALS['welcomeMessage'])
+            if str(msg.payload.decode("utf-8")) == "False":
+                print("Door staying closed")
+                lcdparking.LCDParking(self.GLOBALS['outMessage'])
 
 
 

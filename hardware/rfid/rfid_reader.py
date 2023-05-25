@@ -108,7 +108,6 @@ class RFIDReader:
 
                     MQTTPublish().publish("upm/mqtt/spots", self.GLOBALS['spots'])
                     time.sleep(1)
-                    MQTTPublish().publish("upm/mqtt/rfid/open", False)
                     GPIO.output(self.Led_verte, GPIO.LOW)
                     self.pwm.ChangeDutyCycle(self.angle_to_percent(0))
                     time.sleep(1)
