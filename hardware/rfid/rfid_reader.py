@@ -119,5 +119,5 @@ class RFIDReader:
                 time.sleep(1)
 
 # Exemple d'utilisation
-rfid_reader = RFIDReader()
-rfid_reader.read_rfid()
+# rfid_reader = RFIDReader()
+# rfid_reader.read_rfid()

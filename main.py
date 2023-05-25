@@ -6,8 +6,8 @@ import hardware.presence.ultrasound as us
 import hardware.servo.servo as servo
 
 
-def rfid_loop():
-    RFIDReader()
+# def rfid_loop():
+#     RFIDReader()
 
 def mqtt_listen():
     mqtt_sub.MQTTClient()
@@ -20,17 +20,15 @@ def servo_loop():
 
 
 def main():
+    rfid_reader = RFIDReader()
 
     mqtt_thread = threading.Thread(target=mqtt_listen)
-    rfid_thread = threading.Thread(target=rfid_loop)
-    #us_thread = threading.Thread(target=us_loop)
+    rfid_thread = threading.Thread(target=rfid_reader.read_rfid)
+    us_thread = threading.Thread(target=us_loop)
 
-    mqtt_thread.daemon = True
-    rfid_thread.daemon = True
-
-    #mqtt_thread.start()
+    mqtt_thread.start()
     rfid_thread.start()
-    #us_thread.start()
+    us_thread.start()
 
     # Attendre indéfiniment que les threads se terminent
     # (ne terminera jamais car ce sont des boucles infinies)
