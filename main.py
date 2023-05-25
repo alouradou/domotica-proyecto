@@ -1,4 +1,4 @@
-# from hardware.rfid.rfid_reader import RFIDReader
+from hardware.rfid.rfid_reader import RFIDReader as RFIDReader
 import threading
 import time
 import mqtt.sub as mqtt_sub
@@ -7,9 +7,7 @@ import hardware.servo.servo as servo
 
 
 def rfid_loop():
-    while True:
-        print("RFID loop: No card")
-        time.sleep(5)
+    RFIDReader.RFIDReader()
 
 def mqtt_listen():
     mqtt_sub.MQTTClient()
