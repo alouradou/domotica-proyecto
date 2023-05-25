@@ -90,10 +90,11 @@ class RFIDReader:
         self.GLOBALS['spots'] = self.GLOBALS['spots'] + 1
 
         MQTTPublish().publish("upm/mqtt/spots", self.GLOBALS['spots'])
+        GPIO.output(11, GPIO.LOW)
+        GPIO.output(13, GPIO.HIGH)
         time.sleep(1)
         # GPIO.output(self.Led_verte, GPIO.LOW)
         self.pwm.ChangeDutyCycle(self.angle_to_percent(0))
-        time.sleep(1)
         print("LED off moteur 0")
 
 
