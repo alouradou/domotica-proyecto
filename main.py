@@ -8,6 +8,12 @@ import hardware.servo.servo as servo
 
 global GLOBALS
 
+GLOBALS = {
+    "spots": 10,
+    "welcomeMessage": "¡Bienvenido al parking!",
+    "outMessage": "¡Hasta luego!",
+}
+
 def mqtt_listen():
     mqtt_sub.MQTTClient(GLOBALS)
 
@@ -17,11 +23,6 @@ def servo_loop():
 
 
 def main():
-    GLOBALS = {
-        "spots": 10,
-        "welcomeMessage": "¡Bienvenido al parking!",
-        "outMessage": "¡Hasta luego!",
-    }
     rfid_reader = RFIDReader(GLOBALS)
 
     mqtt_thread = threading.Thread(target=mqtt_listen)
