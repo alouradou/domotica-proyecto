@@ -57,5 +57,5 @@ class APIServer:
         server.server_close()
         print('Server stopped')
 
-    def redefine_messages():
+    def redefine_messages(self):
         print('Current welcome message:', GLOBALS['welcomeMessage'])
