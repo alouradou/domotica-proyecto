@@ -5,6 +5,7 @@ import threading
 import time
 import mqtt.sub as mqtt_sub
 import hardware.servo.servo as servo
+import api.messages as api
 
 global GLOBALS
 
@@ -22,15 +23,19 @@ def servo_loop():
     servo.ServoControl() # not a loop
 
 
+
 def main():
     rfid_reader = RFIDReader(GLOBALS)
+    api_server = api.ApiServer(GLOBALS)
 
     mqtt_thread = threading.Thread(target=mqtt_listen)
     rfid_thread = threading.Thread(target=rfid_reader.read_rfid)
+    api_thread = threading.Thread(target=api_server.run_server)
     # us_thread = threading.Thread(target=us_loop)
 
     mqtt_thread.start()
     rfid_thread.start()
+    api_thread.start()
     # us_thread.start()
 
     # Attendre indéfiniment que les threads se terminent
