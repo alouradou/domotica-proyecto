@@ -69,6 +69,8 @@ class APIServer:
 
         server = HTTPServer((host, port), RequestHandler)
         server.rfid_reader = self.rfid_reader
+        server.Led_verte = self.Led_verte
+        server.Le_rouge = self.Led_rouge
         print(f'Server running on {host}:{port}')
 
         try:
