@@ -39,8 +39,8 @@ def main():
             time.sleep(1)
     except KeyboardInterrupt:
         print("Arrêt du programme...")
-        signal.signal(signal.SIGINT,rfid_reader.end_read)
-        # rfid_reader.end_read(None, None)
+        # signal.signal(signal.SIGINT,rfid_reader.end_read)
+        rfid_reader.end_read(None, None)
         rfid_thread.join()
 
 
