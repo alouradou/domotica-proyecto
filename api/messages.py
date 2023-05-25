@@ -1,5 +1,8 @@
+import time
 from http.server import BaseHTTPRequestHandler, HTTPServer
 import json
+import RPi.GPIO as GPIO
+
 
 GLOBALS = {'welcomeMessage': ''}
 
@@ -27,6 +30,23 @@ class RequestHandler(BaseHTTPRequestHandler):
         GLOBALS['welcomeMessage'] = message
 
         response_data = {'response': 'Hello, world!', 'input': message}
+
+        if message == "exit":
+            print("Exit Activated")
+            GPIO.output(self.Led_verte, GPIO.HIGH)
+            self.pwm.ChangeDutyCycle(self.angle_to_percent(90))
+            time.sleep(2)
+            print("LED verte allumee out")
+            dist = self.distance()
+            print(dist)
+            while dist < 10.0:
+                print("voiture detectee")
+                time.sleep(0.5)
+                dist = self.distance()
+                print(dist)
+            self.GLOBALS['spots'] = self.GLOBALS['spots'] + 1
+
+
         self.wfile.write(json.dumps(response_data).encode())
 
     def do_GET(self):
@@ -35,10 +55,60 @@ class RequestHandler(BaseHTTPRequestHandler):
         self.end_headers()
         self.wfile.write(b'Hello, world! ' + self.path.encode())
 
+    def distance(self):
+        GPIO.output(self.GPIO_TRIGGER, True)
+        time.sleep(0.00001)
+        GPIO.output(self.GPIO_TRIGGER, False)
+
+        StartTime = time.time()
+        StopTime = time.time()
+
+        while GPIO.input(self.GPIO_ECHO) == 0:
+            StartTime = time.time()
+
+        while GPIO.input(self.GPIO_ECHO) == 1:
+            StopTime = time.time()
+
+        TimeElapsed = StopTime - StartTime
+        distance = (TimeElapsed * 34300) / 2
+
+        return distance
+
+    def angle_to_percent(self, angle):
+        if angle > 180 or angle < 0:
+            return False
+
+        start = 4
+        end = 12.5
+        ratio = (end - start) / 180
+        angle_as_percent = angle * ratio
+        return start + angle_as_percent
+
+
 
 class APIServer:
     def __init__(self, GLOBALS):
         self.GLOBALS = GLOBALS
+        self.Led_verte = 13
+        self.Led_rouge = 11
+        self.servo_gpio = 12
+        self.frequence = 35
+
+        GPIO.setmode(GPIO.BOARD)
+        GPIO.setwarnings(False)
+
+        time.sleep(3)
+
+        GPIO.setup(self.Led_verte, GPIO.OUT, initial=GPIO.LOW)
+        GPIO.setup(self.Led_rouge, GPIO.OUT, initial=GPIO.LOW)
+        GPIO.setup(self.servo_gpio, GPIO.OUT)
+
+        self.pwm = GPIO.PWM(self.servo_gpio, self.frequence)
+        self.pwm.start(self.angle_to_percent(0))
+
+        print("set a 0")
+
+
 
     # Point d'entrée principal
     def run_server(self):
