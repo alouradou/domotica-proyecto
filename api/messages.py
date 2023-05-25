@@ -7,11 +7,9 @@ GLOBALS = {'welcomeMessage': ''}
 
 # Classe de gestionnaire de requêtes
 class RequestHandler(BaseHTTPRequestHandler):
-    def __init__(self, *args, **kwargs):
+    def __init__(self, rfid_reader, *args, **kwargs):
+        self.rfid_reader = rfid_reader
         super().__init__(*args, **kwargs)
-        self.rfid_reader = None
-        self.Led_verte = 13
-        self.Led_rouge = 11
 
     def do_OPTIONS(self): # cors policy (important for api calls)
         self.send_response(200, "ok")
@@ -37,7 +35,7 @@ class RequestHandler(BaseHTTPRequestHandler):
         response_data = {'response': 'Hello, world!', 'input': message}
 
         if message == "exit":
-            GPIO.output(13, GPIO.HIGH)
+            GPIO.output(11, GPIO.HIGH)
             self.rfid_reader.force_open()
 
         self.wfile.write(json.dumps(response_data).encode())
@@ -69,7 +67,7 @@ class APIServer:
         host = '192.168.137.8'
         port = 8000
 
-        server = HTTPServer((host, port), RequestHandler)
+        server = HTTPServer((host, port), lambda *args, **kwargs: RequestHandler(self.rfid_reader, *args, **kwargs))
         server.rfid_reader = self.rfid_reader
         server.Led_verte = self.Led_verte
         server.Led_rouge = self.Led_rouge
