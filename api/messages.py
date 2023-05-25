@@ -1,3 +1,4 @@
+import time
 from http.server import BaseHTTPRequestHandler, HTTPServer
 import json
 import RPi.GPIO as GPIO
@@ -37,6 +38,11 @@ class RequestHandler(BaseHTTPRequestHandler):
         if message == "exit":
             GPIO.output(11, GPIO.HIGH)
             self.rfid_reader.force_open()
+            time.sleep(1)
+            GPIO.output(11, GPIO.LOW)
+            GPIO.output(13, GPIO.HIGH)
+            time.sleep(2)
+            GPIO.output(13, GPIO.LOW)
 
         self.wfile.write(json.dumps(response_data).encode())
 
@@ -80,6 +86,7 @@ class APIServer:
 
         server.server_close()
         print('Server stopped')
+        GPIO.cleanup()
 
     def redefine_messages(self):
         print('Current welcome message:', GLOBALS['welcomeMessage'])
