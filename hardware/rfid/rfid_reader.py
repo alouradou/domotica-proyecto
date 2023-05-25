@@ -88,6 +88,7 @@ class RFIDReader:
                 uid = str(uid[0]) + "." + str(uid[1]) + "." + str(uid[2]) + "." + str(uid[3])
                 print("UID de la carte : " + uid)
                 MQTTPublish().publish("upm/mqtt/rfid/uid", uid)
+                print(GLOBALS.spots)
                 if ((uid[0] == 243) and (uid[1] == 5) and (uid[2] == 26) and (uid[3] == 154) and (GLOBALS.spots > 0)):
                     MQTTPublish().publish("upm/mqtt/rfid/open", True)
                     GPIO.output(self.Led_verte, GPIO.HIGH)
