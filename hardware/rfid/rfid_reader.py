@@ -76,10 +76,10 @@ class RFIDReader:
 
     def force_open(self):
         MQTTPublish().publish("upm/mqtt/exit/open", True)
-        GPIO.output(self.Led_verte, GPIO.HIGH)
+        # GPIO.output(self.Led_verte, GPIO.HIGH)
         self.pwm.ChangeDutyCycle(self.angle_to_percent(90))
         time.sleep(2)
-        print("LED verte allumee")
+        # print("LED verte allumee")
         dist = self.distance()
         print(dist)
         while dist < 10.0:
@@ -91,7 +91,7 @@ class RFIDReader:
 
         MQTTPublish().publish("upm/mqtt/spots", self.GLOBALS['spots'])
         time.sleep(1)
-        GPIO.output(self.Led_verte, GPIO.LOW)
+        # GPIO.output(self.Led_verte, GPIO.LOW)
         self.pwm.ChangeDutyCycle(self.angle_to_percent(0))
         time.sleep(1)
         print("LED off moteur 0")
