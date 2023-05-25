@@ -32,8 +32,13 @@ def main():
 
     # Attendre indéfiniment que les threads se terminent
     # (ne terminera jamais car ce sont des boucles infinies)
-    while True:
-        time.sleep(1)
+    try:
+        while True:
+            time.sleep(1)
+    except KeyboardInterrupt:
+        print("Arrêt du programme...")
+        rfid_reader.end_read(None, None)
+        rfid_thread.join()
 
 
 if __name__ == "__main__":
