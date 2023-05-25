@@ -26,7 +26,7 @@ def servo_loop():
 
 def main():
     rfid_reader = RFIDReader(GLOBALS)
-    api_server = api.APIServer(GLOBALS)
+    api_server = api.APIServer(GLOBALS,rfid_reader)
 
     mqtt_thread = threading.Thread(target=mqtt_listen)
     rfid_thread = threading.Thread(target=rfid_reader.read_rfid)

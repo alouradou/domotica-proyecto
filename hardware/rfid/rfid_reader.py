@@ -74,6 +74,29 @@ class RFIDReader:
         self.pwm.stop()
         GPIO.cleanup()
 
+    def force_open(self):
+        MQTTPublish().publish("upm/mqtt/exit/open", True)
+        GPIO.output(self.Led_verte, GPIO.HIGH)
+        self.pwm.ChangeDutyCycle(self.angle_to_percent(90))
+        time.sleep(2)
+        print("LED verte allumee")
+        dist = self.distance()
+        print(dist)
+        while dist < 10.0:
+            print("voiture detectee")
+            time.sleep(0.5)
+            dist = self.distance()
+            print(dist)
+        self.GLOBALS['spots'] = self.GLOBALS['spots'] + 1
+
+        MQTTPublish().publish("upm/mqtt/spots", self.GLOBALS['spots'])
+        time.sleep(1)
+        GPIO.output(self.Led_verte, GPIO.LOW)
+        self.pwm.ChangeDutyCycle(self.angle_to_percent(0))
+        time.sleep(1)
+        print("LED off moteur 0")
+
+
     def read_rfid(self):
         print("Passer le tag RFID a lire")
 
