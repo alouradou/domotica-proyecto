@@ -39,7 +39,6 @@ class RequestHandler(BaseHTTPRequestHandler):
 class APIServer:
     def __init__(self, GLOBALS):
         self.GLOBALS = GLOBALS
-        self.run_server()
 
     # Point d'entrée principal
     def run_server(self):
