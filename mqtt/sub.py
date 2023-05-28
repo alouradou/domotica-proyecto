@@ -40,6 +40,12 @@ class MQTTClient:
             lcdparking.LcdParking("Plazas: " + str(self.GLOBALS['spots']))
         elif msg.topic == "upm/mqtt/rfid/uid":
             print("RFID tag read: " + str(msg.payload.decode("utf-8")))
+        elif msg.topic == "upm/mqtt/web/name1":
+            print("Changing welcome message to " + str(msg.payload.decode("utf-8")))
+            self.GLOBALS['welcomeMessage'] = str(msg.payload.decode("utf-8"))
+        elif msg.topic == "upm/mqtt/web/name2":
+            print("Changing out message to " + str(msg.payload.decode("utf-8")))
+            self.GLOBALS['outMessage'] = str(msg.payload.decode("utf-8"))
         elif msg.topic == "upm/mqtt/rfid/open":
             print("RFID ok: " + str(msg.payload.decode("utf-8")))
             if str(msg.payload.decode("utf-8")) == "True":
