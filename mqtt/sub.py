@@ -29,10 +29,6 @@ class MQTTClient:
 
         if msg.topic == "upm/mqtt/web":
             print("Broker connected to web")
-        elif msg.topic == "upm/mqtt/name1":
-            print("Changing welcome message to " + str(msg.payload.decode("utf-8")))
-        elif msg.topic == "upm/mqtt/name2":
-            print("Changing out message to " + str(msg.payload.decode("utf-8")))
         elif msg.topic == "upm/mqtt/presence":
             print("Presence state changed to " + str(msg.payload.decode("utf-8")))
         elif msg.topic == "upm/mqtt/spots":
