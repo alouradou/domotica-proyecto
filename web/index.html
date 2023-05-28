@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <title>Interfaz de Administración de Parking Conectado</title>
+  <!-- Enlaces a los archivos CSS de Bootstrap -->
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css">
+  <link rel="stylesheet" href="./src/css/style.css">
+</head>
+
+<body>
+<!-- Barra de navegación -->
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+  <a class="navbar-brand" href="#">Parking Conectado</a>
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav"
+          aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+  <div class="collapse navbar-collapse" id="navbarNav">
+    <ul class="navbar-nav">
+      <li class="nav-item active">
+        <a class="nav-link" href="#">Inicio</a>
+      </li>
+<!--      <li class="nav-item">-->
+<!--        <a class="nav-link" href="#">Configuración</a>-->
+<!--      </li>-->
+<!--      <li class="nav-item">-->
+<!--        <a class="nav-link" href="#">Estadísticas</a>-->
+<!--      </li>-->
+    </ul>
+  </div>
+</nav>
+
+<!-- Contenido principal -->
+<div class="container mt-4">
+  <h1>Bienvenido a la interfaz de administración del Parking</h1>
+  <p>Aquí podrás gestionar todas las funciones del proyecto de domótica.</p>
+  <hr/>
+  <div class="row align-items-start">
+    <div class="col">
+      <h3>Control de la salida</h3>
+      <p>¡Verfica que el cliente ha pagado!</p>
+      <button id="sendRequestButton" class="btn btn-primary">Abrir Salida</button>
+    </div>
+  </div>
+  <hr/>
+  <div class="row align-items-start">
+    <div class="col">
+      <h3>Administración</h3>
+      <p>Aquí se pueden configurar los mensajes de entrada y salida del aparcamiento.</p>
+    </div>
+  </div>
+  <div class="row align-items-start">
+    <div class="col4">
+      <div class="input-group">
+        <input type="text" class="form-control" placeholder="Bienvenido" id="sendMqttInput"/>
+        <button class="btn btn-outline-secondary" type="button" id="sendMqttButton" >Send MQTT</button>
+      </div>
+    </div>
+  </div>
+  <br/>
+  <div class="row align-items-start">
+    <div class="col4">
+      <div class="input-group">
+        <input type="text" class="form-control" placeholder="No puedes entrar" id="sendMqttInput2"/>
+        <button class="btn btn-outline-secondary" type="button" id="sendMqttButton2" >Send MQTT</button>
+      </div>
+    </div>
+  </div>
+  <hr/>
+
+</div>
+
+<div class="console">
+  <div class="console-top">
+    <h6>MQTT Channel</h6>
+    <hr>
+  </div>
+  <div id="messageContainer"></div>
+</div>
+
+
+<!-- Enlaces a los archivos JavaScript de Bootstrap y jQuery -->
+<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js"></script>
+<script src="./main.js"></script>
+<script src="./src/js/api.js"></script>
+<script type="module">
+  // set names of channels
+  import {sendMessage} from "./src/js/mqtt.js";
+
+  const sendMqttMessage = function () {
+    const name1 = document.getElementById('sendMqttInput').value
+    sendMessage(name1)
+    console.log("Set name1 to: " + name1)
+  }
+
+  document.getElementById('sendMqttButton').addEventListener('click', sendMqttMessage);
+
+</script>
+<script>
+  document.getElementById('sendRequestButton').addEventListener('click', sendPostRequest);
+</script>
+</body>
+
+</html>
