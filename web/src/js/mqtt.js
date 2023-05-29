@@ -45,10 +45,10 @@ client.on('message', function (topic, message) {
     messageContainer.appendChild(document.createElement("br"));
 });
 
-export function sendMessage(name) {
+export function sendMessage(name, channel=1) {
     client.subscribe('upm/mqtt/#', function (err) {
         if (!err) {
-            client.publish('upm/mqtt/web/name1', name)
+            client.publish('upm/mqtt/web/name'+channel.toString(), name)
         }
     });
 }

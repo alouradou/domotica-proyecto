@@ -98,7 +98,14 @@
     console.log("Set name1 to: " + name1)
   }
 
+  const sendMqttMessage2 = function () {
+    const name2 = document.getElementById('sendMqttInput2').value
+    sendMessage(name2,2)
+    console.log("Set name2 to: " + name2)
+  }
+
   document.getElementById('sendMqttButton').addEventListener('click', sendMqttMessage);
+  document.getElementById('sendMqttButton2').addEventListener('click', sendMqttMessage2);
 
 </script>
 <script>
