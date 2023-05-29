@@ -1,6 +1,10 @@
 # Domótica Proyecto
 
-Here is the project realized for Domótica class in UPM, Madrid el 29 de Mayo 2023.
+Este es el proyecto realizado para la clase de Domótica en la UPM, Madrid
+presentado el 29 de mayo de 2023.
+
+Here is the project realized for Domotics class in UPM, Madrid 
+presented on 29th May, 2023.
 
 ## Setup
 
