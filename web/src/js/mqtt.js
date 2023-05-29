@@ -17,16 +17,16 @@ const messageContainer = document.getElementById('messageContainer');
 
 // Connecter le client MQTT
 client.on('connect', function () {
-    console.log('Connecté au broker MQTT');
+    console.log('Conectado al broker MQTT');
     const newMessage = document.createElement('span')
-    newMessage.textContent = 'Connecté au broker MQTT ' + broker;
+    newMessage.textContent = 'Conectado al broker MQTT ' + broker;
     newMessage.style.color = 'green';
     messageContainer.appendChild(newMessage);
     messageContainer.appendChild(document.createElement("br"));
 
     client.subscribe('upm/mqtt/#', function (err) {
         if (!err) {
-            client.publish('upm/mqtt/web', 'Web Interface Connected')
+            client.publish('upm/mqtt/web', 'Interfaz web conectada')
         }
     });
 
