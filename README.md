@@ -12,6 +12,11 @@ The project executes on a Raspberry Pi with a RFID reader, a LCD screen and a se
 
 Distibution: Raspberry Pi OS.
 
+## MQTT Broker
+
+The setup the Pi's MQTT broker, follow the following instructions:
+https://cedalo.com/blog/enabling-websockets-over-mqtt-with-mosquitto/
+
 ## Web Server
 
 To **set up** the web server (On the Pi or on whatever computer):
